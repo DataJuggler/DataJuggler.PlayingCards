@@ -45,7 +45,7 @@ namespace DataJuggler.PlayingCards
             // store the args
             this.Platform = platform;
             this.Deck = deck;
-            this.Shuffler = new RandomShuffler.RandomShuffler(numberDecks, 2, 14, 5);
+            this.Shuffler = new RandomShuffler.RandomShuffler(numberDecks, 10);
         }
         #endregion
         
@@ -99,6 +99,13 @@ namespace DataJuggler.PlayingCards
 
                         // load the pixelDatabase
                         pixelDatabase = PixelDatabaseLoader.LoadPixelDatabase(stream);
+
+                        // if the pixelDatabase exists
+                        if (NullHelper.Exists(pixelDatabase))
+                        {
+                            // Set the Bitmap
+                            card.Bitmap = pixelDatabase.DirectBitmap.Bitmap;
+                        }
                     }
                 }
             }
@@ -114,21 +121,13 @@ namespace DataJuggler.PlayingCards
                 Card card = null;
 
                 // if the value for HasShuffler is true
-                if (HasShuffler && Shuffler.CanPullNextItem())
+                if (HasShuffler && Shuffler.HasCards)
                 {
                     // pull the next card
                     card = Shuffler.PullNextCard();
 
-                    // if this is Blazor
-                    if (Platform == PlatformEnum.Blazor)
-                    {
-                        // Set the card path
-                        card.Path = GetCardPath(card);
-                    }
-                    else
-                    {
-                        
-                    }
+                    // Load the card image or set the path depending on the platform
+                    LoadCard(card);                   
                 }
 
                 // return value

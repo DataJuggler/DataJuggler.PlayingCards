@@ -91,10 +91,14 @@ JackSpades.png
 KingClubs.png
 AceDiamonds.png
 
-This NuGet package uses a deck of cards I created called The Gilded Deck. I am copying the read me from here so you can 
-see the card previews. 
+# Updates
+5.31.2026: I fixed the Dealer class. It now works for WinFroms. I will finish the WInForms sample and build a Blazor 
+sample as soon as I get some time.
 
 # The Gilded Deck
+
+This NuGet package uses a deck of cards I created called The Gilded Deck. I am copying the read me from here so you can 
+see the card previews. 
 
 **Please enjoy these cards** — I worked really hard to create them.
 
