@@ -17,7 +17,7 @@ Or search for **DataJuggler.PlayingCards** in Visual Studio's NuGet Package Mana
     RandomShuffler shuffler = new RandomShuffler(1, 10);
 
     // create a dealer
-    Dealer dealer = new Dealer(PlatformEnum.Windows, DeckEnum.TheGildedDeck);
+    Dealer dealer = new Dealer(PlatformEnum.Windows, DeckEnum.TheGildedDeck, CardBackEnum.CardBackBlue);
 
     // Shuffle the cards (already shuffled above, just showing an example)
     dealer.Shuffle();
@@ -46,8 +46,24 @@ Or search for **DataJuggler.PlayingCards** in Visual Studio's NuGet Package Mana
         }
     }
 
+    // Note The Constructor Now Loads a CardBack. If you do not need the CardBack, do not pass in a card back value
+    // in the constructor.
+    // You can check if a card back is set with
+    if (dealer.HasCardBack)
+    {
+        // Get the CardBack Card
+        Card cardBack = dealer.CardBack;
+
+        // This card will contain
+        string path = cardBack.Path             // Blazor Projeocts
+        Bitmap bitmap = cardBack.Bitmap  // WinForms projects
+    }
+
     // GetPictureBox just returns PictureBox1 - PictureBox5 for a Video Poker Sample I am working on.
     // Card.Bitmap is set in Dealer.PullNextCard() method for WinForms
+
+In a future release I will update the Card object to contain a CardBack Image and Path, but for now, just use the
+Dealer.CardBack.Bitmap or Dealer.CardBack.Path. 
 
 # Blazor Example Coming Soon
 
@@ -92,8 +108,12 @@ KingClubs.png
 AceDiamonds.png
 
 # Updates
+
 5.31.2026: I fixed the Dealer class. It now works for WinFroms. I will finish the WInForms sample and build a Blazor 
-sample as soon as I get some time.
+sample as soon as I get some time. 
+
+I also added an enum called CardBackEnum and a method to the Dealer class called LoadCardBack.
+This method returns a Card that has Card.Bitmap set for WinForms or Card.Path set for Blazor projects. 
 
 # The Gilded Deck
 

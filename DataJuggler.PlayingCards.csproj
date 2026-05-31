@@ -4,7 +4,7 @@
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Version>1.0.4</Version>
+    <Version>1.0.5</Version>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>ReadMe.md</PackageReadmeFile>
@@ -12,6 +12,8 @@
     <RepositoryUrl>https://github.com/DataJuggler/DataJuggler.PlayingCards</RepositoryUrl>
     <RepositoryType>GitHub git</RepositoryType>
     <PackageTags>Cards, PlayingCards, Shuffle, Games, Deck</PackageTags>
+    <Description>DataJuggler.PlayingCards makes it simple to shuffle and display playing cards for WinForms or Blazor projects.</Description>
+    <PackageProjectUrl>https://github.com/DataJuggler/DataJuggler.PlayingCards</PackageProjectUrl>
   </PropertyGroup>
 
 	<ItemGroup>
@@ -25,10 +27,6 @@
   <ItemGroup>
     <PackageReference Include="DataJuggler.PixelDatabase" Version="10.2.9" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="10.0.8" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\RandomShuffler\DataJuggler.RandomShuffler.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -3,14 +3,17 @@
 namespace DataJuggler.PlayingCards.Enumerations
 {
     
-    #region PlatformEnum : int
+    #region CardBackEnum : int
     /// <summary>
-    /// This enum is used to what type of environment is the Dealer hosted in
+    /// This enum is for the CardBacks that are currently in the deck
     /// </summary>
-    public enum PlatformEnum : int
+    public enum CardBackEnum : int
     {
-        Blazor = 1,
-        Windows = 2
+        DoNotLoadCardBack = 0,
+        CardBackBlue = 1,
+        CardBackRed = 2,
+        CardBack2Blue = 3,
+        CardBack2Red = 4
     }
     #endregion
 
@@ -21,6 +24,17 @@ namespace DataJuggler.PlayingCards.Enumerations
     public enum DeckEnum : int
     {
         TheGildedDeck = 1
+    }
+    #endregion
+
+    #region PlatformEnum : int
+    /// <summary>
+    /// This enum is used to what type of environment is the Dealer hosted in
+    /// </summary>
+    public enum PlatformEnum : int
+    {
+        Blazor = 1,
+        Windows = 2
     }
     #endregion
 
