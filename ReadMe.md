@@ -109,6 +109,9 @@ AceDiamonds.png
 
 # Updates
 
+6.1.2026: PixelDatabase was updated and this udpates RandomShuffler. This fixes a bug where Card Full Name
+was not including the extension .png. 
+
 5.31.2026: I fixed the Dealer class. It now works for WinFroms. I will finish the WInForms sample and build a Blazor 
 sample as soon as I get some time. 
 
