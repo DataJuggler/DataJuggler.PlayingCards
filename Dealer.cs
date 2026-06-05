@@ -177,7 +177,7 @@ namespace DataJuggler.PlayingCards
             public Card LoadCardBack(CardBackEnum cardBack)
             {
                 // create a card to represent the card back
-                Card card = new Card(SuitEnum.Clubs, CardEnum.Ace, 14);
+                Card card = new Card(SuitEnum.Clubs, CardEnum.Ace, 14, true);
 
                 // get the file name
                 string fileName = GetCardBackFileName(cardBack);
@@ -215,11 +215,11 @@ namespace DataJuggler.PlayingCards
             }
             #endregion
             
-            #region PullNextCard()
+            #region PullNextCard(bool exposed = true)
             /// <summary>
             /// returns the Next Card
             /// </summary>
-            public Card PullNextCard()
+            public Card PullNextCard(bool exposed = true)
             {
                 // initial value
                 Card card = null;
@@ -231,7 +231,10 @@ namespace DataJuggler.PlayingCards
                     card = Shuffler.PullNextCard();
 
                     // Load the card image or set the path depending on the platform
-                    LoadCard(card);                   
+                    LoadCard(card);
+
+                    // Set the value for Exposed
+                    card.Exposed = exposed;
                 }
 
                 // return value
@@ -239,18 +242,36 @@ namespace DataJuggler.PlayingCards
             }
             #endregion
             
-            #region Shuffle()
+            #region SetExposed(bool exposed)
+            /// <summary>
+            /// Set Exposed
+            /// </summary>
+            public void SetExposed(bool exposed)
+            {
+                // Set the value
+                if ((HasShuffler) && (Shuffler.HasCards))
+                {
+                    // Set the value for all the cards
+                    Shuffler.SetExposed(exposed);
+                }
+            }
+            #endregion
+            
+            #region Shuffle(int shuffles = 5, bool exposed = false)
             /// <summary>
             /// Shuffle
             /// </summary>
-            public void Shuffle()
+            public void Shuffle(int shuffles = 5, bool exposed = false)
             {
                 // if the value for HasShuffler is true
                 if (HasShuffler)
                 {
                     // Shuffle the decks
-                    Shuffler.Shuffle(5);
+                    Shuffler.Shuffle(shuffles);
                 }
+
+                // Set the value for Exposed
+                Shuffler.SetExposed(exposed);
             }
             #endregion
             

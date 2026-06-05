@@ -109,6 +109,11 @@ AceDiamonds.png
 
 # Updates
 
+6.5.2026: Card now has sa property caled Exposted, and PullNextCard accepts an optional parameter for exposed which defaults to true.
+Also Dealer.Shuffle has two optional parameters:
+shuffles - number of times to shuffle. Default value is 5
+exposed - default value is false. this sets all the cards pulled to card.Exposted = false;
+
 6.1.2026: PixelDatabase was updated and this udpates RandomShuffler. This fixes a bug where Card Full Name
 was not including the extension .png. 
 
