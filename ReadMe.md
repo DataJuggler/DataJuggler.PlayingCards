@@ -109,6 +109,10 @@ AceDiamonds.png
 
 # Updates
 
+6.9.2026: I added an image called GreenFelt.png. This can be used for a game table for various games.
+
+    path = $"_content/DataJuggler.PlayingCards/GreenFelt.png";
+
 6.5.2026: Card now has sa property caled Exposted, and PullNextCard accepts an optional parameter for exposed which defaults to true.
 Also Dealer.Shuffle has two optional parameters:
 shuffles - number of times to shuffle. Default value is 5
