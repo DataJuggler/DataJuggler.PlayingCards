@@ -198,7 +198,7 @@ namespace DataJuggler.PlayingCards
                     if (Platform == PlatformEnum.Blazor)
                     {
                         // set the path for Blazor
-                        card.Path = "_content/DataJuggler.PlayingCards/Decks/TheGildedDeck/CardBacks" + fileName;
+                        card.Path = "_content/DataJuggler.PlayingCards/Decks/TheGildedDeck/CardBacks/" + fileName;
                     }
                     else if (Platform == PlatformEnum.Windows)
                     {

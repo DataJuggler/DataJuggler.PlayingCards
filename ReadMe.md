@@ -109,6 +109,8 @@ AceDiamonds.png
 
 # Updates
 
+6.15.2026: I fixed the CardBackPath for Blazor was missing a closing /
+
 # Major Update of all face cards, card backs and a new Joker was added.
 
 6.14.2026: The first face cards were too gold. Gold background, gold uniform etc. I changed the face cards to have a light
