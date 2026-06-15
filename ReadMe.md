@@ -109,6 +109,30 @@ AceDiamonds.png
 
 # Updates
 
+# Major Update of all face cards, card backs and a new Joker was added.
+
+6.14.2026: The first face cards were too gold. Gold background, gold uniform etc. I changed the face cards to have a light
+blue background and added a little more color to the wardrobes of the face cards. The Card Baks were also updated
+and all the CardEnums that worked before are now broken. The new card backs are better to me. Let me know what you think.
+Also by request a Joker was created.
+
+The Dealer has a new method, LoadJoker
+
+    // Load the Joker card image
+    card joker = Dealer.LoadJoker();
+
+The Joker image will be loaded if jokersCount is greater than zero in the constructor (jokersCount is an optional parameter).
+
+The Card object has a new property 'IsJoker'.
+
+# Breaking Change
+
+Now is the time to break stuff since this project is new. The constructor for the Card object is now Card first, Suit next.
+The reason is the cards are called AceClubs.png (example) and this aligns wiht that.
+
+The constructor for a Dealer now accepts an optional jokersCount parameter to create jokers as part of your deck.
+Use card.IsJoker to determine if this is a joker. 
+
 6.9.2026: I added an image called GreenFelt.png. This can be used for a game table for various games.
 
     path = $"_content/DataJuggler.PlayingCards/GreenFelt.png";
@@ -254,12 +278,14 @@ If you find these images worth the price.
 </div>
 
 ### Card Backs
+<div align="center" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 20px;">
+<img src="https://github.com/DataJuggler/TheGildedDeck/blob/master/CardBacks/CardBacksPreview.png?raw=true" width="740" height="280" alt="Emerald Labyrinth"/><br>
+</div>
+
+### By Request - A Joker Was Created
 
 <div align="center" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 20px;">
-<img src="https://github.com/DataJuggler/TheGildedDeck/blob/master/CardBackBlue.png?raw=true" width="160" height="224" alt="Blue Back"/>
-<img src="https://github.com/DataJuggler/TheGildedDeck/blob/master/CardBackRed.png?raw=true" width="160" height="224" alt="Red Back"/>
-<img src="https://github.com/DataJuggler/TheGildedDeck/blob/master/CardBack2Blue.png?raw=true" width="160" height="224" alt="Blue Back 2"/>
-<img src="https://github.com/DataJuggler/TheGildedDeck/blob/master/CardBack2Red.png?raw=true" width="160" height="224" alt="Red Back 2"/>
+  <img src="https://github.com/DataJuggler/TheGildedDeck/blob/master/Jokers/Joker.png?raw=true" width="160" height="224" alt="Joker"/>
 </div>
 
 ---

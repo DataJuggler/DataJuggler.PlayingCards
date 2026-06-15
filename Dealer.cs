@@ -32,17 +32,20 @@ namespace DataJuggler.PlayingCards
         private DeckEnum deck;
         private RandomShuffler.RandomShuffler shuffler;
         private const string CardAssemblyRoot = "DataJuggler.PlayingCards.wwwroot.Decks.TheGildedDeck.";
+        private const string CardBacksFolder = "CardBacks.";
+        private const string JokersFolder = "Jokers.";
         private Card cardBackImage;
+        private Card jokerImage;
         #endregion
         
-        #region Constructor(PlatformEnum platform, DeckEnum deck, CardBackEnum cardBack = CardBackEnum.DoNotLoadCardBack, int numberDecks = 1)
+        #region Constructor(PlatformEnum platform, DeckEnum deck, CardBackEnum cardBack = CardBackEnum.DoNotLoadCardBack, int numberDecks = 1, int jokersCount = 0)
         /// <summary>
         /// Create a new instance of a Dealer objects.
         /// </summary>
         /// <param name="platform"></param>
         /// <param name="deck"></param>
         /// <param name="cardBack">The card back to use</param>
-        public Dealer(PlatformEnum platform, DeckEnum deck, CardBackEnum cardBack = CardBackEnum.DoNotLoadCardBack, int numberDecks = 1)
+        public Dealer(PlatformEnum platform, DeckEnum deck, CardBackEnum cardBack = CardBackEnum.DoNotLoadCardBack, int numberDecks = 1, int jokersCount = 0)
         {
             // store the args
             this.Platform = platform;
@@ -54,6 +57,13 @@ namespace DataJuggler.PlayingCards
             {
                 // Load the CardBackImage
                 this.CardBackImage = LoadCardBack(cardBack);
+            }
+
+            // If the value for jokersCount is greater than zero
+            if (jokersCount > 0)
+            {
+                // Load the Joker
+                this.JokerImage = LoadJoker();
             }
         }
         #endregion
@@ -72,34 +82,34 @@ namespace DataJuggler.PlayingCards
                 // determine the file name based on the cardBack
                 switch (cardBack)
                 {
-                    case CardBackEnum.CardBackBlue:
+                    case CardBackEnum.BlueDiamond:
 
                         // set the fileName
-                        fileName = "CardBackBlue.png";
+                        fileName = "BlueDiamond.png";
 
                         // required
                         break;
 
-                    case CardBackEnum.CardBackRed:
+                    case CardBackEnum.CrimsonHelix:
 
                         // set the fileName
-                        fileName = "CardBackRed.png";
+                        fileName = "CrimsonHelix.png";
 
                         // required
                         break;
 
-                    case CardBackEnum.CardBack2Blue:
+                    case CardBackEnum.EmeraldLabyrinth:
 
                         // set the fileName
-                        fileName = "CardBack2Blue.png";
+                        fileName = "EmeraldLabyrinth.png";
 
                         // required
                         break;
 
-                    case CardBackEnum.CardBack2Red:
+                    case CardBackEnum.VerdantAscension:
 
                         // set the fileName
-                        fileName = "CardBack2Red.png";
+                        fileName = "VerdantAscension.png";
 
                         // required
                         break;
@@ -177,7 +187,7 @@ namespace DataJuggler.PlayingCards
             public Card LoadCardBack(CardBackEnum cardBack)
             {
                 // create a card to represent the card back
-                Card card = new Card(SuitEnum.Clubs, CardEnum.Ace, 14, true);
+                Card card = new Card(CardEnum.Ace, SuitEnum.Clubs, 14, true);
 
                 // get the file name
                 string fileName = GetCardBackFileName(cardBack);
@@ -188,15 +198,64 @@ namespace DataJuggler.PlayingCards
                     if (Platform == PlatformEnum.Blazor)
                     {
                         // set the path for Blazor
-                        card.Path = "_content/DataJuggler.PlayingCards/Decks/TheGildedDeck/" + fileName;
+                        card.Path = "_content/DataJuggler.PlayingCards/Decks/TheGildedDeck/CardBacks" + fileName;
                     }
                     else if (Platform == PlatformEnum.Windows)
                     {
+                        // for Windows, a Stream must be loaded to the get the imaige out of the NuGet package assembly.
+
                         // initial value
                         DataJuggler.PixelDatabase.PixelDatabase pixelDatabase = null;
 
                         // get the stream
-                        Stream stream = typeof(Dealer).Assembly.GetManifestResourceStream(CardAssemblyRoot + fileName);
+                        Stream stream = typeof(Dealer).Assembly.GetManifestResourceStream(CardAssemblyRoot +  CardBacksFolder + fileName);
+
+                        // load the pixelDatabase
+                        pixelDatabase = PixelDatabaseLoader.LoadPixelDatabase(stream);
+
+                        // if the pixelDatabase exists
+                        if (NullHelper.Exists(pixelDatabase))
+                        {
+                            // Set the Bitmap
+                            card.Bitmap = pixelDatabase.DirectBitmap.Bitmap;
+                        }
+                    }
+                }
+
+                // return value
+                return card;
+            }
+            #endregion
+
+            #region LoadJoker()
+            /// <summary>
+            /// Loads a Joker CardBack
+            /// </summary>
+            public Card LoadJoker()
+            {
+                // create a card to represent the card back
+                Card card = new Card(CardEnum.Joker, SuitEnum.Unknown, 100, true);
+
+                // get the file name
+                string fileName = "Joker.png";
+
+                // If the fileName exists
+                if (TextHelper.Exists(fileName))
+                {
+                    if (Platform == PlatformEnum.Blazor)
+                    {
+                        // set the path for Blazor
+                        card.Path = "_content/DataJuggler.PlayingCards/Decks/TheGildedDeck/Jokers" + fileName;
+                    }
+                    else if (Platform == PlatformEnum.Windows)
+                    {
+                        // for Windows, a Stream must be loaded to the get the imaige out of the NuGet package assembly.
+
+                        // initial value
+                        DataJuggler.PixelDatabase.PixelDatabase pixelDatabase = null;
+
+                        // get the stream
+                        Stream stream = typeof(Dealer).Assembly.GetManifestResourceStream(CardAssemblyRoot +  JokersFolder + fileName);
 
                         // load the pixelDatabase
                         pixelDatabase = PixelDatabaseLoader.LoadPixelDatabase(stream);
@@ -318,6 +377,23 @@ namespace DataJuggler.PlayingCards
             }
             #endregion
             
+            #region HasJokerImage
+            /// <summary>
+            /// This property returns true if this object has a 'JokerImage'.
+            /// </summary>
+            public bool HasJokerImage
+            {
+                get
+                {
+                    // initial value
+                    bool hasJokerImage = (JokerImage != null);
+
+                    // return value
+                    return hasJokerImage;
+                }
+            }
+            #endregion
+            
             #region HasShuffler
             /// <summary>
             /// This property returns true if this object has a 'Shuffler'.
@@ -332,6 +408,17 @@ namespace DataJuggler.PlayingCards
                     // return value
                     return hasShuffler;
                 }
+            }
+            #endregion
+            
+            #region JokerImage
+            /// <summary>
+            /// This property gets or sets the value for 'JokerImage'.
+            /// </summary>
+            public Card JokerImage
+            {
+                get { return jokerImage; }
+                set { jokerImage = value; }
             }
             #endregion
             

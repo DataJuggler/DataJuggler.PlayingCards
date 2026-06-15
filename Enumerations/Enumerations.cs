@@ -10,10 +10,10 @@ namespace DataJuggler.PlayingCards.Enumerations
     public enum CardBackEnum : int
     {
         DoNotLoadCardBack = 0,
-        CardBackBlue = 1,
-        CardBackRed = 2,
-        CardBack2Blue = 3,
-        CardBack2Red = 4
+        BlueDiamond = 1,
+        CrimsonHelix = 2,
+        EmeraldLabyrinth = 3,
+        VerdantAscension = 4
     }
     #endregion
 
