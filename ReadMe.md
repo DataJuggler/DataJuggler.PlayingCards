@@ -17,7 +17,7 @@ Or search for **DataJuggler.PlayingCards** in Visual Studio's NuGet Package Mana
     RandomShuffler shuffler = new RandomShuffler(1, 10);
 
     // create a dealer
-    Dealer dealer = new Dealer(PlatformEnum.Windows, DeckEnum.TheGildedDeck, CardBackEnum.CardBackBlue);
+    Dealer dealer = new Dealer(PlatformEnum.Windows, DeckEnum.TheGildedDeck, CardBackEnum.EmeraldLabyrinth);
 
     // Shuffle the cards (already shuffled above, just showing an example)
     dealer.Shuffle();
