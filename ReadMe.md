@@ -109,6 +109,10 @@ AceDiamonds.png
 
 # Updates
 
+6.17.2026: DataJuggler.Blazor.Components was updated, and a new CardObject was added to 
+this library. DataJuggler.PlayingCards.Objects namespace. A CardInfo links a 
+DataJuggler.RandomShuffler.Objects.Card with a DataJuggler.Blazor.Components.ImageButton.
+
 6.15.2026: I fixed the CardBackPath for Blazor was missing a closing /
 
 # Major Update of all face cards, card backs and a new Joker was added.
