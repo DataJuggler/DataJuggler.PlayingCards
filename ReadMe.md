@@ -46,6 +46,15 @@ Or search for **DataJuggler.PlayingCards** in Visual Studio's NuGet Package Mana
         }
     }
 
+# Manually Load a card back image. The method LoadCard loads the background image depending on the platform,
+Blazor (Web) or Windows
+
+	// Load this Card (Sets the Path)
+	Dealer.LoadCard(card);
+
+Dealer.PullNextCard calls the LoadCard method, but if your cards are dealt out first you might need to call
+the LoadCard method if you are getting null paths or bitmaps.
+
     // Note The Constructor Now Loads a CardBack. If you do not need the CardBack, do not pass in a card back value
     // in the constructor.
     // You can check if a card back is set with
@@ -108,6 +117,50 @@ KingClubs.png
 AceDiamonds.png
 
 # Updates
+
+6.21.2026: I added a new method LoadGreenFelt:
+
+* Note: This is for Windows only
+														
+      public PixelDatabase.PixelDatabase LoadGreenFelt()
+      {
+			// initial value
+			PixelDatabase.PixelDatabase pixelDatabase = null;
+        
+			// which platform?
+			if (Platform == PlatformEnum.Blazor)
+			{
+				// raise an error wrong platform
+				throw new Exception("This call is only available for Windows");
+			}
+			else if (Platform == PlatformEnum.Windows)
+			{
+				// for Windows, a Stream must be loaded to the get the imaige out of the NuGet package assembly.
+            
+				// get the stream
+				Stream stream = typeof(Dealer).Assembly.GetManifestResourceStream(GreenFeltPath);
+            
+				// load the pixelDatabase
+				pixelDatabase = PixelDatabaseLoader.LoadPixelDatabase(stream);
+			}
+        
+			// return value
+			return pixelDatabase;
+  	  }
+
+Load the PixelDatabase
+
+    PixelDatabase greenFeltDB = dealer.LoadGreenFelt();
+
+	if (NullHelper.Exists(greenFeltDB))
+	{
+		MainForm.BackgroundImage = greenFeltDB.DirectBitmap.Bitmap;
+	}
+
+* Note: In some projects you have to refer to PixelDatabase with the full name to avoid the 'PixelDatabase is a 
+namespace but used like a type' error.
+
+    PixelDatabase.PixelDatabase greenFelltDB = dealer.LoadGreenFelt();
 
 6.17.2026: DataJuggler.Blazor.Components was updated, and a new CardObject was added to 
 this library. DataJuggler.PlayingCards.Objects namespace. A CardInfo links a 

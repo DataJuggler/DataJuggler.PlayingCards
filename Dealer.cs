@@ -32,6 +32,7 @@ namespace DataJuggler.PlayingCards
         private DeckEnum deck;
         private RandomShuffler.RandomShuffler shuffler;
         private const string CardAssemblyRoot = "DataJuggler.PlayingCards.wwwroot.Decks.TheGildedDeck.";
+        private const string GreenFeltPath = "DataJuggler.PlayingCards.wwwroot.GreenFelt.png";
         private const string CardBacksFolder = "CardBacks.";
         private const string JokersFolder = "Jokers.";
         private Card cardBackImage;
@@ -227,6 +228,38 @@ namespace DataJuggler.PlayingCards
             }
             #endregion
 
+            #region LoadGreenFelt()
+            /// <summary>
+            /// Loads a PixelDatabase from GreenFelt.png.
+            /// This call is for WinForms only.
+            /// </summary>
+            public PixelDatabase.PixelDatabase LoadGreenFelt()
+            {
+                // initial value
+                PixelDatabase.PixelDatabase pixelDatabase = null;
+
+                // which platform? 
+                if (Platform == PlatformEnum.Blazor)
+                {
+                    // raise an error wrong platform
+                    throw new Exception("This call is only available for Windows");
+                }
+                else if (Platform == PlatformEnum.Windows)
+                {
+                    // for Windows, a Stream must be loaded to the get the imaige out of the NuGet package assembly.
+
+                    // get the stream
+                    Stream stream = typeof(Dealer).Assembly.GetManifestResourceStream(GreenFeltPath);
+
+                    // load the pixelDatabase
+                    pixelDatabase = PixelDatabaseLoader.LoadPixelDatabase(stream);
+                }
+
+                // return value
+                return pixelDatabase;
+            }
+            #endregion
+
             #region LoadJoker()
             /// <summary>
             /// Loads a Joker CardBack
@@ -234,7 +267,7 @@ namespace DataJuggler.PlayingCards
             public Card LoadJoker()
             {
                 // create a card to represent the card back
-                Card card = new Card(CardEnum.Joker, SuitEnum.Unknown, 100, true);
+                Card card = new Card(CardEnum.Joker, SuitEnum.NotSet, 100, true);
 
                 // get the file name
                 string fileName = "Joker.png";
