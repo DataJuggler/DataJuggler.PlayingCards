@@ -51,7 +51,7 @@ namespace DataJuggler.PlayingCards
             // store the args
             this.Platform = platform;
             this.Deck = deck;
-            this.Shuffler = new RandomShuffler.RandomShuffler(numberDecks, 10);
+            this.Shuffler = RandomShuffler.RandomShuffler.CreateForCards(numberDecks, 10);
 
             // if any card back except Do Not Load Card Back
             if (cardBack != CardBackEnum.DoNotLoadCardBack)

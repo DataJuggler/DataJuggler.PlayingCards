@@ -13,8 +13,11 @@ Or search for **DataJuggler.PlayingCards** in Visual Studio's NuGet Package Mana
 
 ## Five Card Draw WinForms Example
 
-    // create a shuffler - 1 deck, shuffle 10 times
-    RandomShuffler shuffler = new RandomShuffler(1, 10);
+    // Note: Some projects you may have to refer to it as RandomShuffler.RandomShuffler.CreateForCards(1,10);
+	//			  This is due to the namespace and class name being the same. 
+
+    // create a shuffler for cards 1 deck, shuffle 10 times
+    RandomShuffler shuffler = RandomShuffer.CreateForCards(1, 10);
 
     // create a dealer
     Dealer dealer = new Dealer(PlatformEnum.Windows, DeckEnum.TheGildedDeck, CardBackEnum.EmeraldLabyrinth);
@@ -121,7 +124,8 @@ AceDiamonds.png
 6.21.2026: I added a new method LoadGreenFelt:
 
 * Note: This is for Windows only
-														
+
+														
       public PixelDatabase.PixelDatabase LoadGreenFelt()
       {
 			// initial value
