@@ -121,6 +121,8 @@ AceDiamonds.png
 
 # Updates
 
+7.24.2026: DataJuggler.Blazor.Components and DataJuggler.PixelDatabase were updated.
+
 6.21.2026: I added a new method LoadGreenFelt:
 
 * Note: This is for Windows only
