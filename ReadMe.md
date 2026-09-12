@@ -121,6 +121,9 @@ AceDiamonds.png
 
 # Updates
 
+9.12.2026: DataJuggler.Blazor.Components had to be updated due to a vulnerable package Microsoft.Builds.Tasks 
+was listed as vulnerable and had to be updated. Some other Packages were also updated. 
+
 7.24.2026: DataJuggler.Blazor.Components and DataJuggler.PixelDatabase were updated.
 
 6.21.2026: I added a new method LoadGreenFelt:
