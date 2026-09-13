@@ -121,6 +121,10 @@ AceDiamonds.png
 
 # Updates
 
+9.13.2026: Yesterday's attempt didn't fix the problem. This will, I rememoved DataJuggler.Excelerate
+from DataJuggler.Blazor.Components. This will solve it, as NPOI was the real culprit, referenced by
+my Excel library. 
+
 9.12.2026: DataJuggler.Blazor.Components had to be updated due to a vulnerable package Microsoft.Builds.Tasks 
 was listed as vulnerable and had to be updated. Some other Packages were also updated. 
 
