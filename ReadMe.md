@@ -121,6 +121,8 @@ AceDiamonds.png
 
 # Updates
 
+11.8.2026: I recreated the Card Images to use a bigger text size. Makes the cards easier to read on small screens.
+
 9.13.2026: Yesterday's attempt didn't fix the problem. This will, I rememoved DataJuggler.Excelerate
 from DataJuggler.Blazor.Components. This will solve it, as NPOI was the real culprit, referenced by
 my Excel library. 
